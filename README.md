@@ -1,6 +1,6 @@
 # Loan Management System (LMS)
 
-A full-stack loan management platform where borrowers can apply for loans and internal teams manage the entire lifecycle — from reviewing applications to disbursing funds and collecting payments. Built with Next.js, Express, TypeScript, and MongoDB.
+A full-stack loan management platform where borrowers can apply for loans and internal teams manage the entire lifecycle - from reviewing applications to disbursing funds and collecting payments. Built with Next.js, Express, TypeScript, and MongoDB.
 
 ## Tech stack
 
@@ -22,15 +22,15 @@ cd CreditSea
 
 ### 2. Install dependencies
 
-Open two terminal windows — one for the server, one for the client.
+Open two terminal windows - one for the server, one for the client.
 
-**Terminal 1 — backend:**
+**Terminal 1 - backend:**
 ```bash
 cd server
 npm install
 ```
 
-**Terminal 2 — frontend:**
+**Terminal 2 - frontend:**
 ```bash
 cd client
 npm install
@@ -38,7 +38,7 @@ npm install
 
 ### 3. Set up environment variables
 
-**Backend** — copy the example file and open it:
+**Backend** - copy the example file and open it:
 ```bash
 cp server/.env.example server/.env
 ```
@@ -52,7 +52,7 @@ JWT_EXPIRES_IN=7d
 UPLOAD_DIR=uploads/
 ```
 
-**Frontend** — copy the example file:
+**Frontend** - copy the example file:
 ```bash
 cp client/.env.local.example client/.env.local
 ```
@@ -79,7 +79,7 @@ cd server
 npm run dev
 ```
 
-**Frontend** (port 3000) — in a separate terminal:
+**Frontend** (port 3000) - in a separate terminal:
 ```bash
 cd client
 npm run dev
@@ -113,7 +113,7 @@ Video walkthrough: *Coming soon*
 ## How the loan flow works
 
 1. Borrower signs up and fills in personal details
-2. A Business Rule Engine (BRE) checks eligibility — age, salary, PAN, employment
+2. A Business Rule Engine (BRE) checks eligibility - age, salary, PAN, employment
 3. Borrower uploads a salary slip and configures loan amount + tenure
 4. Loan lands in the **Sanction** queue for executive review
 5. Once approved, it moves to **Disbursement**
@@ -161,7 +161,7 @@ CreditSea-main/
 |----------|-------------|
 | `PORT` | Port the API runs on (default: 5000) |
 | `MONGODB_URI` | Your MongoDB connection string |
-| `JWT_SECRET` | Secret used to sign tokens — make it long and random |
+| `JWT_SECRET` | Secret used to sign tokens - make it long and random |
 | `JWT_EXPIRES_IN` | How long tokens stay valid (e.g. `7d`) |
 | `UPLOAD_DIR` | Where salary slip files get saved (default: `uploads/`) |
 
