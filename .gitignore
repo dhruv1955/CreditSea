@@ -1,5 +1,7 @@
  # Node
  node_modules/
+server/node_modules/
+client/node_modules/
  npm-debug.log*
  yarn-debug.log*
  yarn-error.log*
@@ -16,10 +18,13 @@
  
  # Environment files
  .env
+.env.*
  .env.local
  .env.development.local
  .env.test.local
  .env.production.local
+server/.env
+client/.env.local
  
  # Logs
  logs
@@ -45,7 +50,3 @@
  *.pem
  credentials
  ~$*
-.env
-.env.local
-server/.env
-client/.env.local
