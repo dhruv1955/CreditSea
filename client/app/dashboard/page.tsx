@@ -263,91 +263,91 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6">
-      <div className="mx-auto max-w-7xl rounded-3xl border border-amber-300/80 bg-white/95 p-6 shadow-[0_20px_80px_-35px_rgba(120,53,15,0.5)] sm:p-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-3 py-6 sm:px-4 sm:py-8">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-amber-300/80 bg-white/95 p-4 sm:p-6 shadow-[0_20px_80px_-35px_rgba(120,53,15,0.5)]">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700">Operations Dashboard</p>
-            <h1 className="text-2xl font-bold text-amber-950 sm:text-3xl">Role: {role || "loading"}</h1>
-            <p className="mt-1 text-sm text-amber-800">Modules enabled: {activeModules.join(", ") || "none"}</p>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-amber-950">Role: {role || "loading"}</h1>
+            <p className="mt-1 text-xs sm:text-sm text-amber-800">Modules enabled: {activeModules.join(", ") || "none"}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={refresh}
-              className="rounded-lg border border-amber-300 px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-50"
+              className="rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm sm:px-4 font-medium text-amber-900 hover:bg-amber-50"
             >
               Refresh
             </button>
             <button
               onClick={logout}
-              className="rounded-lg bg-amber-800 px-4 py-2 text-sm font-medium text-white hover:bg-amber-900"
+              className="rounded-lg bg-amber-800 px-3 py-2 text-xs sm:text-sm sm:px-4 font-medium text-white hover:bg-amber-900"
             >
               Logout
             </button>
           </div>
         </div>
 
-        {message ? <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">{message}</p> : null}
-        {error ? <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">{error}</p> : null}
-        {loading ? <p className="mt-3 text-sm text-amber-800">Syncing with server...</p> : null}
+        {message ? <p className="mt-3 sm:mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-2 py-2 sm:px-3 text-xs sm:text-sm text-emerald-800">{message}</p> : null}
+        {error ? <p className="mt-3 sm:mt-4 rounded-lg border border-red-200 bg-red-50 px-2 py-2 sm:px-3 text-xs sm:text-sm text-red-800">{error}</p> : null}
+        {loading ? <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-amber-800">Syncing with server...</p> : null}
 
-        <div className="mt-6 space-y-6">
+        <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
           {canSeeSales ? (
-            <section className="rounded-2xl border border-amber-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-amber-950">Sales leads</h2>
-              <div className="mt-3 overflow-x-auto">
-                <table className="min-w-full text-sm">
+            <section className="rounded-2xl border border-amber-200 bg-white p-3 sm:p-5">
+              <h2 className="text-base sm:text-lg font-semibold text-amber-950">Sales leads</h2>
+              <div className="mt-2 sm:mt-3 overflow-x-auto">
+                <table className="min-w-full text-xs sm:text-sm">
                   <thead>
                     <tr className="border-b border-amber-200 text-left text-amber-900">
-                      <th className="px-2 py-2">Name</th>
-                      <th className="px-2 py-2">Email</th>
-                      <th className="px-2 py-2">Monthly salary</th>
-                      <th className="px-2 py-2">Employment</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Name</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Email</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Monthly salary</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Employment</th>
                     </tr>
                   </thead>
                   <tbody>
                     {salesLeads.map((lead) => (
                       <tr key={lead._id} className="border-b border-amber-100 text-amber-800">
-                        <td className="px-2 py-2">{lead.name}</td>
-                        <td className="px-2 py-2">{lead.email}</td>
-                        <td className="px-2 py-2">{lead.monthlySalary ? `Rs ${money(lead.monthlySalary)}` : "-"}</td>
-                        <td className="px-2 py-2">{lead.employmentMode || "-"}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{lead.name}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{lead.email}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{lead.monthlySalary ? `Rs ${money(lead.monthlySalary)}` : "-"}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{lead.employmentMode || "-"}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                {!salesLeads.length ? <p className="pt-3 text-sm text-amber-800">No sales leads available.</p> : null}
+                {!salesLeads.length ? <p className="pt-2 sm:pt-3 text-xs sm:text-sm text-amber-800">No sales leads available.</p> : null}
               </div>
             </section>
           ) : null}
 
           {canSeeSanction ? (
-            <section className="rounded-2xl border border-amber-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-amber-950">Sanction queue</h2>
-              <div className="mt-3 overflow-x-auto">
-                <table className="min-w-full text-sm">
+            <section className="rounded-2xl border border-amber-200 bg-white p-3 sm:p-5">
+              <h2 className="text-base sm:text-lg font-semibold text-amber-950">Sanction queue</h2>
+              <div className="mt-2 sm:mt-3 overflow-x-auto">
+                <table className="min-w-full text-xs sm:text-sm">
                   <thead>
                     <tr className="border-b border-amber-200 text-left text-amber-900">
-                      <th className="px-2 py-2">Borrower</th>
-                      <th className="px-2 py-2">Amount</th>
-                      <th className="px-2 py-2">Tenure</th>
-                      <th className="px-2 py-2">Repayment</th>
-                      <th className="px-2 py-2">Actions</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Borrower</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Amount</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Tenure</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Repayment</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {sanctionQueue.map((loan) => (
                       <tr key={loan._id} className="border-b border-amber-100 text-amber-800">
-                        <td className="px-2 py-2">{borrowerLabel(loan.borrowerId)}</td>
-                        <td className="px-2 py-2">Rs {money(loan.amount)}</td>
-                        <td className="px-2 py-2">{loan.tenure} days</td>
-                        <td className="px-2 py-2">Rs {money(loan.totalRepayment)}</td>
-                        <td className="px-2 py-2">
-                          <div className="flex gap-2">
-                            <button onClick={() => void onApprove(loan._id)} className="rounded bg-emerald-600 px-2 py-1 text-xs font-semibold text-white">
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{borrowerLabel(loan.borrowerId)}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">Rs {money(loan.amount)}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{loan.tenure} days</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">Rs {money(loan.totalRepayment)}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">
+                          <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
+                            <button onClick={() => void onApprove(loan._id)} className="rounded bg-emerald-600 px-2 py-1 text-xs font-semibold text-white w-full sm:w-auto">
                               Approve
                             </button>
-                            <button onClick={() => void onReject(loan._id)} className="rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white">
+                            <button onClick={() => void onReject(loan._id)} className="rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white w-full sm:w-auto">
                               Reject
                             </button>
                           </div>
@@ -356,34 +356,34 @@ export default function DashboardPage() {
                     ))}
                   </tbody>
                 </table>
-                {!sanctionQueue.length ? <p className="pt-3 text-sm text-amber-800">No loans in sanction queue.</p> : null}
+                {!sanctionQueue.length ? <p className="pt-2 sm:pt-3 text-xs sm:text-sm text-amber-800">No loans in sanction queue.</p> : null}
               </div>
             </section>
           ) : null}
 
           {canSeeDisbursement ? (
-            <section className="rounded-2xl border border-amber-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-amber-950">Disbursement queue</h2>
-              <div className="mt-3 overflow-x-auto">
-                <table className="min-w-full text-sm">
+            <section className="rounded-2xl border border-amber-200 bg-white p-3 sm:p-5">
+              <h2 className="text-base sm:text-lg font-semibold text-amber-950">Disbursement queue</h2>
+              <div className="mt-2 sm:mt-3 overflow-x-auto">
+                <table className="min-w-full text-xs sm:text-sm">
                   <thead>
                     <tr className="border-b border-amber-200 text-left text-amber-900">
-                      <th className="px-2 py-2">Borrower</th>
-                      <th className="px-2 py-2">Amount</th>
-                      <th className="px-2 py-2">Sanctioned at</th>
-                      <th className="px-2 py-2">Action</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Borrower</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Amount</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Sanctioned at</th>
+                      <th className="px-1 sm:px-2 py-1 sm:py-2">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {disbursementQueue.map((loan) => (
                       <tr key={loan._id} className="border-b border-amber-100 text-amber-800">
-                        <td className="px-2 py-2">{borrowerLabel(loan.borrowerId)}</td>
-                        <td className="px-2 py-2">Rs {money(loan.amount)}</td>
-                        <td className="px-2 py-2">{loan.sanctionedAt ? new Date(loan.sanctionedAt).toLocaleDateString() : "-"}</td>
-                        <td className="px-2 py-2">
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{borrowerLabel(loan.borrowerId)}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">Rs {money(loan.amount)}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">{loan.sanctionedAt ? new Date(loan.sanctionedAt).toLocaleDateString() : "-"}</td>
+                        <td className="px-1 sm:px-2 py-1 sm:py-2">
                           <button
                             onClick={() => void onDisburse(loan._id)}
-                            className="rounded bg-amber-700 px-2 py-1 text-xs font-semibold text-white"
+                            className="rounded bg-amber-700 px-2 py-1 text-xs font-semibold text-white w-full sm:w-auto"
                           >
                             Disburse
                           </button>
@@ -392,33 +392,33 @@ export default function DashboardPage() {
                     ))}
                   </tbody>
                 </table>
-                {!disbursementQueue.length ? <p className="pt-3 text-sm text-amber-800">No loans in disbursement queue.</p> : null}
+                {!disbursementQueue.length ? <p className="pt-2 sm:pt-3 text-xs sm:text-sm text-amber-800">No loans in disbursement queue.</p> : null}
               </div>
             </section>
           ) : null}
 
           {canSeeCollection ? (
-            <section className="rounded-2xl border border-amber-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-amber-950">Collection queue</h2>
-              <div className="mt-4 space-y-4">
+            <section className="rounded-2xl border border-amber-200 bg-white p-3 sm:p-5">
+              <h2 className="text-base sm:text-lg font-semibold text-amber-950">Collection queue</h2>
+              <div className="mt-3 sm:mt-4 space-y-3 sm:space-y-4">
                 {collectionQueue.map((loan) => {
                   const form = paymentForms[loan._id] || defaultPaymentForm();
                   const history = collectionHistory[loan._id] || [];
                   return (
-                    <article key={loan._id} className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                      <div className="grid gap-2 text-sm text-amber-900 sm:grid-cols-2 lg:grid-cols-4">
+                    <article key={loan._id} className="rounded-xl border border-amber-200 bg-amber-50 p-3 sm:p-4">
+                      <div className="grid gap-2 text-xs sm:text-sm text-amber-900 sm:grid-cols-2 lg:grid-cols-4">
                         <p>Borrower: {borrowerLabel(loan.borrowerId)}</p>
                         <p>Repayment: Rs {money(loan.totalRepayment)}</p>
                         <p>Total paid: Rs {money(loan.totalPaid)}</p>
                         <p>Outstanding: Rs {money(loan.outstanding)}</p>
                       </div>
 
-                      <div className="mt-3 grid gap-2 sm:grid-cols-4">
+                      <div className="mt-2 sm:mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                         <input
                           placeholder="UTR"
                           value={form.utr}
                           onChange={(e) => onChangePaymentForm(loan._id, "utr", e.target.value)}
-                          className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          className="rounded border border-amber-300 px-2 py-1 text-xs sm:text-sm"
                           style={{ color: '#1f2937' }}
                         />
                         <input
@@ -426,19 +426,19 @@ export default function DashboardPage() {
                           placeholder="Amount"
                           value={form.amount}
                           onChange={(e) => onChangePaymentForm(loan._id, "amount", e.target.value)}
-                          className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          className="rounded border border-amber-300 px-2 py-1 text-xs sm:text-sm"
                           style={{ color: '#1f2937' }}
                         />
                         <input
                           type="date"
                           value={form.paymentDate}
                           onChange={(e) => onChangePaymentForm(loan._id, "paymentDate", e.target.value)}
-                          className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          className="rounded border border-amber-300 px-2 py-1 text-xs sm:text-sm"
                           style={{ color: '#1f2937' }}
                         />
                         <button
                           onClick={() => void onRecordPayment(loan._id)}
-                          className="rounded bg-amber-700 px-3 py-1 text-sm font-semibold text-white"
+                          className="rounded bg-amber-700 px-2 py-1 text-xs sm:text-sm sm:px-3 font-semibold text-white"
                         >
                           Record payment
                         </button>
@@ -446,27 +446,27 @@ export default function DashboardPage() {
 
                       <button
                         onClick={() => void onLoadCollectionHistory(loan._id)}
-                        className="mt-3 rounded border border-amber-400 px-3 py-1 text-xs font-semibold text-amber-900"
+                        className="mt-2 sm:mt-3 rounded border border-amber-400 px-2 py-1 text-xs font-semibold text-amber-900 sm:px-3"
                       >
                         Load payment history
                       </button>
 
                       {history.length ? (
-                        <div className="mt-3 overflow-x-auto">
-                          <table className="min-w-full text-sm">
+                        <div className="mt-2 sm:mt-3 overflow-x-auto">
+                          <table className="min-w-full text-xs sm:text-sm">
                             <thead>
                               <tr className="border-b border-amber-200 text-left text-amber-900">
-                                <th className="px-2 py-2">Date</th>
-                                <th className="px-2 py-2">UTR</th>
-                                <th className="px-2 py-2">Amount</th>
+                                <th className="px-1 sm:px-2 py-1 sm:py-2">Date</th>
+                                <th className="px-1 sm:px-2 py-1 sm:py-2">UTR</th>
+                                <th className="px-1 sm:px-2 py-1 sm:py-2">Amount</th>
                               </tr>
                             </thead>
                             <tbody>
                               {history.map((payment) => (
                                 <tr key={payment._id} className="border-b border-amber-100 text-amber-800">
-                                  <td className="px-2 py-2">{new Date(payment.paymentDate).toLocaleDateString()}</td>
-                                  <td className="px-2 py-2">{payment.utr}</td>
-                                  <td className="px-2 py-2">Rs {money(payment.amount)}</td>
+                                  <td className="px-1 sm:px-2 py-1 sm:py-2">{new Date(payment.paymentDate).toLocaleDateString()}</td>
+                                  <td className="px-1 sm:px-2 py-1 sm:py-2">{payment.utr}</td>
+                                  <td className="px-1 sm:px-2 py-1 sm:py-2">Rs {money(payment.amount)}</td>
                                 </tr>
                               ))}
                             </tbody>
@@ -476,7 +476,7 @@ export default function DashboardPage() {
                     </article>
                   );
                 })}
-                {!collectionQueue.length ? <p className="text-sm text-amber-800">No loans in collection queue.</p> : null}
+                {!collectionQueue.length ? <p className="text-xs sm:text-sm text-amber-800">No loans in collection queue.</p> : null}
               </div>
             </section>
           ) : null}

@@ -28,15 +28,15 @@ export default function PersonalDetailsForm({
   loading
 }: PersonalDetailsFormProps) {
   return (
-    <article className="rounded-2xl border border-amber-200 bg-white p-5">
-      <h2 className="text-lg font-semibold text-amber-950">1. Personal details and BRE</h2>
-      <form className="mt-4 space-y-3" onSubmit={onSubmit}>
+    <article className="rounded-2xl border border-amber-200 bg-white p-4 sm:p-5">
+      <h2 className="text-base sm:text-lg font-semibold text-amber-950">1. Personal details and BRE</h2>
+      <form className="mt-3 sm:mt-4 space-y-3" onSubmit={onSubmit}>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
           placeholder="Full name"
-          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm"
           style={{ color: '#1f2937' }}
         />
         <input
@@ -45,7 +45,7 @@ export default function PersonalDetailsForm({
           required
           maxLength={10}
           placeholder="PAN (ABCDE1234F)"
-          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm uppercase"
+          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm uppercase"
           style={{ color: '#1f2937' }}
         />
         <input
@@ -53,7 +53,7 @@ export default function PersonalDetailsForm({
           value={dob}
           onChange={(e) => setDob(e.target.value)}
           required
-          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm"
           style={{ color: '#1f2937' }}
         />
         <input
@@ -63,13 +63,13 @@ export default function PersonalDetailsForm({
           onChange={(e) => setMonthlySalary(e.target.value)}
           required
           placeholder="Monthly salary"
-          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm"
           style={{ color: '#1f2937' }}
         />
         <select
           value={employmentMode}
           onChange={(e) => setEmploymentMode(e.target.value as "salaried" | "self_employed" | "unemployed")}
-          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-amber-300 px-3 py-2 text-xs sm:text-sm"
           style={{ color: '#1f2937' }}
         >
           <option value="salaried">Salaried</option>
@@ -79,7 +79,7 @@ export default function PersonalDetailsForm({
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
+          className="w-full rounded-lg bg-amber-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
         >
           Save and run BRE
         </button>

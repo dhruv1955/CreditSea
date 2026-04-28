@@ -30,12 +30,12 @@ export default function LoanCalculator({
   totalRepayment
 }: LoanCalculatorProps) {
   return (
-    <article className="rounded-2xl border border-amber-200 bg-white p-5 lg:col-span-2">
-      <h2 className="text-lg font-semibold text-amber-950">3. Loan configuration and apply</h2>
+    <article className="rounded-2xl border border-amber-200 bg-white p-4 sm:p-5 lg:col-span-2">
+      <h2 className="text-base sm:text-lg font-semibold text-amber-950">3. Loan configuration and apply</h2>
 
-      <form className="mt-4 grid gap-6 lg:grid-cols-2" onSubmit={onSubmit}>
+      <form className="mt-3 sm:mt-4 grid gap-4 sm:gap-6 lg:grid-cols-2" onSubmit={onSubmit}>
         <div>
-          <label className="block text-sm font-medium text-amber-900">Loan amount: Rs {money(amount)}</label>
+          <label className="block text-xs sm:text-sm font-medium text-amber-900">Loan amount: Rs {money(amount)}</label>
           <input
             type="range"
             min={MIN_AMOUNT}
@@ -43,10 +43,10 @@ export default function LoanCalculator({
             step={1000}
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
-            className="mt-2 w-full"
+            className="mt-1 sm:mt-2 w-full"
           />
 
-          <label className="mt-5 block text-sm font-medium text-amber-900">Tenure: {tenure} days</label>
+          <label className="mt-3 sm:mt-5 block text-xs sm:text-sm font-medium text-amber-900">Tenure: {tenure} days</label>
           <input
             type="range"
             min={MIN_TENURE}
@@ -54,22 +54,22 @@ export default function LoanCalculator({
             step={1}
             value={tenure}
             onChange={(e) => setTenure(Number(e.target.value))}
-            className="mt-2 w-full"
+            className="mt-1 sm:mt-2 w-full"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="mt-5 w-full rounded-lg bg-amber-700 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-800 disabled:opacity-60"
+            className="mt-3 sm:mt-5 w-full rounded-lg bg-amber-700 px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-amber-800 disabled:opacity-60"
           >
             Apply for loan
           </button>
         </div>
 
-        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-          <p className="text-sm font-semibold text-amber-900">Live repayment calculation</p>
-          <p className="mt-2 text-sm text-amber-800">Formula: (P x R x T) / (365 x 100)</p>
-          <dl className="mt-4 space-y-2 text-sm">
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 sm:p-4">
+          <p className="text-xs sm:text-sm font-semibold text-amber-900">Live repayment calculation</p>
+          <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-amber-800">Formula: (P x R x T) / (365 x 100)</p>
+          <dl className="mt-2 sm:mt-4 space-y-1 sm:space-y-2 text-xs sm:text-sm">
             <div className="flex justify-between">
               <dt className="text-amber-700">Principal</dt>
               <dd className="font-semibold text-amber-950">Rs {money(amount)}</dd>
@@ -82,7 +82,7 @@ export default function LoanCalculator({
               <dt className="text-amber-700">Tenure</dt>
               <dd className="font-semibold text-amber-950">{tenure} days</dd>
             </div>
-            <div className="flex justify-between border-t border-amber-200 pt-2">
+            <div className="flex justify-between border-t border-amber-200 pt-1 sm:pt-2">
               <dt className="text-amber-900">Simple interest</dt>
               <dd className="font-semibold text-amber-950">Rs {money(simpleInterest)}</dd>
             </div>

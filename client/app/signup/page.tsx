@@ -33,10 +33,10 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-6 py-12">
-      <div className="w-full max-w-md rounded-2xl border border-amber-300 bg-white p-8 shadow-md">
-        <h1 className="text-2xl font-bold text-amber-950">Create borrower account</h1>
-        <p className="mt-2 text-sm text-amber-800">Start your loan journey in three quick steps.</p>
+    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6 sm:py-12">
+      <div className="w-full max-w-md rounded-2xl border border-amber-300 bg-white p-6 sm:p-8 shadow-md">
+        <h1 className="text-xl sm:text-2xl font-bold text-amber-950">Create borrower account</h1>
+        <p className="mt-2 text-xs sm:text-sm text-amber-800">Start your loan journey in three quick steps.</p>
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <label className="block">
@@ -98,7 +98,7 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-amber-900">
+        <p className="mt-4 text-xs sm:text-sm text-amber-900">
           Already have an account?{" "}
           <Link href="/login" className="font-semibold text-amber-700 hover:text-amber-800">
             Sign in

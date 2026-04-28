@@ -59,28 +59,28 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-6 py-12">
-      <div className="w-full max-w-md rounded-2xl border border-amber-300 bg-white p-8 shadow-md">
-        <h1 className="text-2xl font-bold text-amber-950">Login to CreditSea LMS</h1>
-        <p className="mt-2 text-sm text-amber-800">Use your borrower or operations credentials.</p>
+    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6 sm:py-12">
+      <div className="w-full max-w-md rounded-2xl border border-amber-300 bg-white p-6 sm:p-8 shadow-md">
+        <h1 className="text-xl sm:text-2xl font-bold text-amber-950">Login to CreditSea LMS</h1>
+        <p className="mt-2 text-xs sm:text-sm text-amber-800">Use your borrower or operations credentials.</p>
 
         {existingSession ? (
-          <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-3 text-xs sm:text-sm text-amber-900">
             <p>
               Signed in as <span className="font-semibold">{existingSession.user.email}</span>.
             </p>
-            <div className="mt-3 flex gap-2">
+            <div className="mt-3 flex flex-col sm:flex-row gap-2">
               <button
                 type="button"
                 onClick={continueAsCurrentUser}
-                className="rounded-md bg-amber-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-800"
+                className="rounded-md bg-amber-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-800 w-full sm:w-auto"
               >
                 Continue
               </button>
               <button
                 type="button"
                 onClick={useDifferentAccount}
-                className="rounded-md border border-amber-400 px-3 py-1.5 text-xs font-semibold text-amber-900 hover:bg-amber-100"
+                className="rounded-md border border-amber-400 px-3 py-1.5 text-xs font-semibold text-amber-900 hover:bg-amber-100 w-full sm:w-auto"
               >
                 Sign in with different account
               </button>
@@ -135,7 +135,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-amber-900">
+        <p className="mt-4 text-xs sm:text-sm text-amber-900">
           New borrower?{" "}
           <Link href="/signup" className="font-semibold text-amber-700 hover:text-amber-800">
             Create an account
