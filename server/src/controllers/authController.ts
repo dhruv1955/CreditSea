@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { StringValue } from "ms";
 import { User } from "../models/User";
 import { Role } from "../types";
 
@@ -63,7 +62,7 @@ export const login = async (req: Request<unknown, unknown, LoginBody>, res: Resp
     }
 
     const secret = process.env.JWT_SECRET;
-    const expiresIn = (process.env.JWT_EXPIRES_IN || "7d") as StringValue;
+    const expiresIn = (process.env.JWT_EXPIRES_IN || "7d") as jwt.SignOptions["expiresIn"];
     if (!secret) {
       throw new Error("JWT_SECRET missing");
     }

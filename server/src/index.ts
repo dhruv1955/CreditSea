@@ -39,6 +39,13 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
 
 const start = async () => {
   try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is required");
+    }
+    if (process.env.NODE_ENV === "production" && !process.env.CLIENT_URL) {
+      throw new Error("CLIENT_URL is required in production");
+    }
+
     await connectDB();
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);

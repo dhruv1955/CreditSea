@@ -18,7 +18,7 @@ interface PaymentBody {
 export const getSalesLeads = async (_req: Request, res: Response) => {
   try {
     const leads = await User.aggregate([
-      { $match: { role: "borrower" } },
+      { $match: { role: "borrower", breStatus: "passed" } },
       {
         $lookup: {
           from: "loans",

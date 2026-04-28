@@ -71,6 +71,8 @@ export const savePersonalDetails = async (
     user.dob = dobDate;
     user.monthlySalary = salary;
     user.employmentMode = employmentMode;
+    // Personal data changes invalidate any previously uploaded slip.
+    user.salarySlipUrl = undefined;
     user.breStatus = breResult.passed ? "passed" : "failed";
     user.breFailReason = breResult.passed ? undefined : breResult.reason;
     await user.save();
@@ -127,10 +129,16 @@ export const applyLoan = async (req: AuthenticatedRequest & Request<unknown, unk
       return res.status(400).json({ success: false, message: "amount and tenure are required" });
     }
 
-    if (amount < MIN_LOAN_AMOUNT || amount > MAX_LOAN_AMOUNT) {
+    const parsedAmount = Number(amount);
+    const parsedTenure = Number(tenure);
+    if (!Number.isFinite(parsedAmount) || !Number.isFinite(parsedTenure)) {
+      return res.status(400).json({ success: false, message: "amount and tenure must be valid numbers" });
+    }
+
+    if (parsedAmount < MIN_LOAN_AMOUNT || parsedAmount > MAX_LOAN_AMOUNT) {
       return res.status(400).json({ success: false, message: `Amount must be between ${MIN_LOAN_AMOUNT} and ${MAX_LOAN_AMOUNT}` });
     }
-    if (tenure < MIN_TENURE_DAYS || tenure > MAX_TENURE_DAYS) {
+    if (parsedTenure < MIN_TENURE_DAYS || parsedTenure > MAX_TENURE_DAYS) {
       return res.status(400).json({ success: false, message: `Tenure must be between ${MIN_TENURE_DAYS} and ${MAX_TENURE_DAYS} days` });
     }
 
@@ -169,11 +177,11 @@ export const applyLoan = async (req: AuthenticatedRequest & Request<unknown, unk
       return res.status(400).json({ success: false, message: "Upload salary slip before applying" });
     }
 
-    const { simpleInterest, totalRepayment } = calculateLoan(amount, tenure);
+    const { simpleInterest, totalRepayment } = calculateLoan(parsedAmount, parsedTenure);
     const createdLoan = await Loan.create({
       borrowerId: user._id,
-      amount,
-      tenure,
+      amount: parsedAmount,
+      tenure: parsedTenure,
       interestRate: FIXED_INTEREST_RATE,
       simpleInterest,
       totalRepayment,
