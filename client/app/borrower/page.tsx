@@ -24,7 +24,8 @@ function money(value: number) {
 
 export default function BorrowerPage() {
   const router = useRouter();
-  const [token, setToken] = useState("");
+  const [session] = useState(() => getAuth());
+  const [token] = useState(() => session?.token || "");
   const [profile, setProfile] = useState<BorrowerProfile | null>(null);
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
   const [message, setMessage] = useState("");
@@ -34,7 +35,7 @@ export default function BorrowerPage() {
   const [name, setName] = useState("");
   const [pan, setPan] = useState("");
   const [dob, setDob] = useState("");
-  const [monthlySalary, setMonthlySalary] = useState(25000);
+  const [monthlySalary, setMonthlySalary] = useState("");
   const [employmentMode, setEmploymentMode] = useState<EmploymentMode>("salaried");
   const [salarySlip, setSalarySlip] = useState<File | null>(null);
 
@@ -48,7 +49,7 @@ export default function BorrowerPage() {
     setName(nextProfile.name || "");
     if (nextProfile.personalDetails) {
       setPan(nextProfile.personalDetails.pan || "");
-      setMonthlySalary(nextProfile.personalDetails.monthlySalary || 25000);
+      setMonthlySalary(nextProfile.personalDetails.monthlySalary ? String(nextProfile.personalDetails.monthlySalary) : "");
       setEmploymentMode(nextProfile.personalDetails.employmentMode || "salaried");
 
       const parsedDob = nextProfile.personalDetails.dob
@@ -80,8 +81,8 @@ export default function BorrowerPage() {
     }
   };
 
+  // Initial data load on page mount for the authenticated borrower session.
   useEffect(() => {
-    const session = getAuth();
     if (!session) {
       router.replace("/login");
       return;
@@ -92,10 +93,9 @@ export default function BorrowerPage() {
       return;
     }
 
-    setToken(session.token);
-    setName(session.user.name || "");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadProfile(session.token);
-  }, [router]);
+  }, [router, session]);
 
   const onSubmitPersonal = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,11 +108,16 @@ export default function BorrowerPage() {
     setLoading(true);
 
     try {
+      const parsedMonthlySalary = Number(monthlySalary);
+      if (!Number.isFinite(parsedMonthlySalary) || parsedMonthlySalary < 25000) {
+        throw new Error("Monthly salary must be at least 25000.");
+      }
+
       const result = await savePersonalDetails(token, {
         name: name.trim(),
         pan: pan.trim().toUpperCase(),
         dob,
-        monthlySalary: Number(monthlySalary),
+        monthlySalary: parsedMonthlySalary,
         employmentMode,
       });
       setMessage(result.breStatus === "passed" ? "Personal details saved and BRE passed." : "BRE failed. Update details and retry.");
@@ -176,8 +181,8 @@ export default function BorrowerPage() {
   const loan = profile?.loan;
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fef3c7_0%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6">
-      <div className="mx-auto max-w-5xl rounded-3xl border border-amber-200/70 bg-white/90 p-6 shadow-[0_20px_80px_-35px_rgba(146,64,14,0.45)] sm:p-8">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-5xl rounded-3xl border border-amber-300/80 bg-white/95 p-6 shadow-[0_20px_80px_-35px_rgba(120,53,15,0.5)] sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700">Borrower Portal</p>
@@ -249,10 +254,10 @@ export default function BorrowerPage() {
                 type="number"
                 value={monthlySalary}
                 min={25000}
-                onChange={(e) => setMonthlySalary(Number(e.target.value))}
+                onChange={(e) => setMonthlySalary(e.target.value)}
                 required
                 placeholder="Monthly salary"
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-950"
               />
               <select
                 value={employmentMode}
@@ -278,11 +283,17 @@ export default function BorrowerPage() {
             <p className="mt-1 text-sm text-amber-800">Allowed formats: PDF, JPG, JPEG, PNG up to 5 MB.</p>
 
             <form className="mt-4 space-y-3" onSubmit={onUploadSalarySlip}>
+              <label className="block">
+                <span className="mb-1 block text-sm font-medium text-amber-900">Choose salary slip</span>
+                <div className="rounded-lg border border-dashed border-amber-400 bg-amber-50 px-3 py-3 text-sm text-amber-900">
+                  {salarySlip ? `Selected: ${salarySlip.name}` : "Upload your latest salary slip (PDF/JPG/JPEG/PNG, max 5 MB)."}
+                </div>
+              </label>
               <input
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
                 onChange={(e) => setSalarySlip(e.target.files?.[0] || null)}
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-950 file:mr-3 file:rounded file:border-0 file:bg-amber-700 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-amber-800"
               />
               <button
                 type="submit"

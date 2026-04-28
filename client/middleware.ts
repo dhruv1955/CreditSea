@@ -31,12 +31,6 @@ export function middleware(request: NextRequest) {
   const role = request.cookies.get("role")?.value;
 
   if (isPublicPath(pathname)) {
-    if (token && role) {
-      if (role === "borrower") {
-        return NextResponse.redirect(new URL("/borrower", request.url));
-      }
-      return NextResponse.redirect(new URL("/dashboard", request.url));
-    }
     return NextResponse.next();
   }
 

@@ -34,7 +34,7 @@ export const getSalesLeads = async (_req: Request, res: Response) => {
             {
               loans: {
                 $not: {
-                  $elemMatch: { status: { $in: ["applied", "sanctioned", "disbursed", "closed"] } },
+                  $elemMatch: { status: { $in: ["applied", "sanctioned", "disbursed"] } },
                 },
               },
             },

@@ -41,8 +41,9 @@ const defaultPaymentForm = (): PaymentFormState => ({
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [token, setToken] = useState("");
-  const [role, setRole] = useState<Role | null>(null);
+  const [session] = useState(() => getAuth());
+  const [token] = useState(() => session?.token || "");
+  const [role] = useState<Role | null>(() => session?.user.role || null);
 
   const [salesLeads, setSalesLeads] = useState<SalesLead[]>([]);
   const [sanctionQueue, setSanctionQueue] = useState<LoanQueueItem[]>([]);
@@ -119,8 +120,8 @@ export default function DashboardPage() {
     }
   };
 
+  // Initial data load on page mount for the authenticated dashboard session.
   useEffect(() => {
-    const session = getAuth();
     if (!session) {
       router.replace("/login");
       return;
@@ -131,10 +132,9 @@ export default function DashboardPage() {
       return;
     }
 
-    setToken(session.token);
-    setRole(session.user.role);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadDashboard(session.token, session.user.role);
-  }, [router]);
+  }, [router, session]);
 
   const refresh = async () => {
     if (!token || !role) {
@@ -259,8 +259,8 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fef3c7_0%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6">
-      <div className="mx-auto max-w-7xl rounded-3xl border border-amber-200/70 bg-white/90 p-6 shadow-[0_20px_80px_-35px_rgba(146,64,14,0.45)] sm:p-8">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-amber-300/80 bg-white/95 p-6 shadow-[0_20px_80px_-35px_rgba(120,53,15,0.5)] sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700">Operations Dashboard</p>

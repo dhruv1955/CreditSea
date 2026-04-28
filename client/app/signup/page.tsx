@@ -13,6 +13,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,8 +33,8 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fef3c7_0%,_#fff7ed_45%,_#fffbeb_100%)] px-6 py-12">
-      <div className="w-full max-w-md rounded-2xl border border-amber-200 bg-white p-8 shadow-sm">
+    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_#fde68a_0%,_#fcd34d_15%,_#fff7ed_45%,_#fffbeb_100%)] px-6 py-12">
+      <div className="w-full max-w-md rounded-2xl border border-amber-300 bg-white p-8 shadow-md">
         <h1 className="text-2xl font-bold text-amber-950">Create borrower account</h1>
         <p className="mt-2 text-sm text-amber-800">Start your loan journey in three quick steps.</p>
 
@@ -64,14 +65,23 @@ export default function SignupPage() {
 
           <label className="block">
             <span className="mb-1 block text-sm font-medium text-amber-900">Password</span>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm outline-none ring-amber-300 focus:ring"
-              placeholder="Set a password"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 pr-20 text-sm text-amber-950 outline-none ring-amber-300 focus:ring"
+                placeholder="Set a password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-2 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-100"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </label>
 
           {error ? <p className="text-sm font-medium text-red-700">{error}</p> : null}
