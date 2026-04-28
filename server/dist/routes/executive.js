@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const executiveController_1 = require("../controllers/executiveController");
+const authenticate_1 = require("../middleware/authenticate");
+const authorize_1 = require("../middleware/authorize");
+const router = (0, express_1.Router)();
+router.get("/sales", authenticate_1.authenticate, (0, authorize_1.authorize)(["sales", "admin"]), executiveController_1.getSalesLeads);
+router.get("/sanction", authenticate_1.authenticate, (0, authorize_1.authorize)(["sanction", "admin"]), executiveController_1.getSanctionQueue);
+router.patch("/sanction/:loanId/approve", authenticate_1.authenticate, (0, authorize_1.authorize)(["sanction", "admin"]), executiveController_1.approveLoan);
+router.patch("/sanction/:loanId/reject", authenticate_1.authenticate, (0, authorize_1.authorize)(["sanction", "admin"]), executiveController_1.rejectLoan);
+router.get("/disbursement", authenticate_1.authenticate, (0, authorize_1.authorize)(["disbursement", "admin"]), executiveController_1.getDisbursementQueue);
+router.patch("/disbursement/:loanId/disburse", authenticate_1.authenticate, (0, authorize_1.authorize)(["disbursement", "admin"]), executiveController_1.disburseLoan);
+router.get("/collection", authenticate_1.authenticate, (0, authorize_1.authorize)(["collection", "admin"]), executiveController_1.getCollectionQueue);
+router.post("/collection/:loanId/payment", authenticate_1.authenticate, (0, authorize_1.authorize)(["collection", "admin"]), executiveController_1.recordPayment);
+exports.default = router;
