@@ -15,6 +15,7 @@ export const storage = new CloudinaryStorage({
     folder: "salary-slips",
     allowed_formats: ["pdf", "jpg", "jpeg", "png"],
     resource_type: "raw",
+    format: "pdf",
   } as any,
 });
 
