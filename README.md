@@ -1,8 +1,8 @@
-# Loan Management System (LMS) 🏦
+# Loan Management System (LMS)
 
 A modern, full-stack loan management application that streamlines the entire loan lifecycle - from application to approval, disbursement, and collection. Built with cutting-edge technology to provide a seamless experience for both borrowers and loan officers.
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 **Backend:**
 - Express.js + TypeScript for robust API development
@@ -14,7 +14,7 @@ A modern, full-stack loan management application that streamlines the entire loa
 - Tailwind CSS for beautiful, responsive UI
 - Modern React patterns with component-based architecture
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Get Your Dependencies Ready
 ```bash
@@ -53,7 +53,7 @@ npm run dev
 
 Visit http://localhost:3000 to see your loan management system in action!
 
-## 👥 Test Users & Login
+## Test Users & Login
 
 To explore the system, we've pre-configured test users for each role:
 
@@ -88,14 +88,14 @@ UPLOAD_DIR=uploads                        # File upload location
 NEXT_PUBLIC_API_URL=http://localhost:5000/api  # Backend API endpoint
 ```
 
-## 🔐 Authentication & Security
+## Authentication & Security
 
 The system uses JWT tokens for secure authentication:
 - **Tokens** are stored in `localStorage` for API calls
 - **Cookies** handle route protection via Next.js middleware
 - **Role-based access** ensures users only see what they're supposed to
 
-## 🎯 Key Features
+## Key Features
 
 - **User Roles**: Admin, Sales, Sanction, Disbursement, Collection, Borrower
 - **Loan Lifecycle**: Application → BRE Check → Approval → Disbursement → Collection
@@ -103,11 +103,10 @@ The system uses JWT tokens for secure authentication:
 - **Real-time Updates**: Live status tracking for all loan operations
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## 🛠️ Development Notes
+## Development Notes
 
 - Built with TypeScript for type safety
 - Component-based architecture for maintainability
 - Error handling with comprehensive logging
 - Git-friendly structure with proper .gitignore setup
 
-Ready to transform loan management? Let's get started! 🚀
