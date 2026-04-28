@@ -111,7 +111,7 @@ After running the seed script, these accounts are ready to use:
 
 ## Demo
 
-Video walkthrough: *Coming soon*
+Video walkthrough: [Demo Youtube](https://www.youtube.com/watch?v=uZoUdHlr7Xk)
 
 ---
 
