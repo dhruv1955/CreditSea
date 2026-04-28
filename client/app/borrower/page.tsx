@@ -234,6 +234,7 @@ export default function BorrowerPage() {
                 required
                 placeholder="Full name"
                 className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                style={{ color: '#1f2937' }}
               />
               <input
                 value={pan}
@@ -242,6 +243,7 @@ export default function BorrowerPage() {
                 maxLength={10}
                 placeholder="PAN (ABCDE1234F)"
                 className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm uppercase"
+                style={{ color: '#1f2937' }}
               />
               <input
                 type="date"
@@ -249,6 +251,7 @@ export default function BorrowerPage() {
                 onChange={(e) => setDob(e.target.value)}
                 required
                 className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                style={{ color: '#1f2937' }}
               />
               <input
                 type="number"
@@ -257,12 +260,14 @@ export default function BorrowerPage() {
                 onChange={(e) => setMonthlySalary(e.target.value)}
                 required
                 placeholder="Monthly salary"
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-950"
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                style={{ color: '#1f2937' }}
               />
               <select
                 value={employmentMode}
                 onChange={(e) => setEmploymentMode(e.target.value as EmploymentMode)}
                 className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
+                style={{ color: '#1f2937' }}
               >
                 <option value="salaried">Salaried</option>
                 <option value="self_employed">Self employed</option>
@@ -293,7 +298,8 @@ export default function BorrowerPage() {
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
                 onChange={(e) => setSalarySlip(e.target.files?.[0] || null)}
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm text-amber-950 file:mr-3 file:rounded file:border-0 file:bg-amber-700 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-amber-800"
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm file:mr-3 file:rounded file:border-0 file:bg-amber-700 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-amber-800"
+                style={{ color: '#1f2937' }}
               />
               <button
                 type="submit"
@@ -379,10 +385,10 @@ export default function BorrowerPage() {
           <section className="mt-8 rounded-2xl border border-amber-200 bg-white p-5">
             <h2 className="text-lg font-semibold text-amber-950">Loan status tracking</h2>
             <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">Status: {loan.status}</div>
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">Amount: Rs {money(loan.amount)}</div>
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">Tenure: {loan.tenure} days</div>
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">Repayment: Rs {money(loan.totalRepayment)}</div>
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm" style={{ color: '#1f2937' }}>Status: {loan.status}</div>
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm" style={{ color: '#1f2937' }}>Amount: Rs {money(loan.amount)}</div>
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm" style={{ color: '#1f2937' }}>Tenure: {loan.tenure} days</div>
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm" style={{ color: '#1f2937' }}>Repayment: Rs {money(loan.totalRepayment)}</div>
             </div>
 
             {payments.length ? (

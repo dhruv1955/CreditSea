@@ -5,12 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -25,8 +19,37 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+input, 
+textarea,
+input[type="text"],
+input[type="email"], 
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="file"] {
+  color: #1f2937 !important;
+}
+
 input::placeholder,
-textarea::placeholder {
-  color: #7c5e3a;
-  opacity: 1;
+textarea::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder, 
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="date"]::placeholder,
+input[type="file"]::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Force dark text for all inputs with higher specificity */
+body input,
+body textarea {
+  color: #1f2937 !important;
+}
+
+body input::placeholder,
+body textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
 }

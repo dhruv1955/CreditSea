@@ -415,6 +415,7 @@ export default function DashboardPage() {
                           value={form.utr}
                           onChange={(e) => onChangePaymentForm(loan._id, "utr", e.target.value)}
                           className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          style={{ color: '#1f2937' }}
                         />
                         <input
                           type="number"
@@ -422,12 +423,14 @@ export default function DashboardPage() {
                           value={form.amount}
                           onChange={(e) => onChangePaymentForm(loan._id, "amount", e.target.value)}
                           className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          style={{ color: '#1f2937' }}
                         />
                         <input
                           type="date"
                           value={form.paymentDate}
                           onChange={(e) => onChangePaymentForm(loan._id, "paymentDate", e.target.value)}
                           className="rounded border border-amber-300 px-2 py-1 text-sm"
+                          style={{ color: '#1f2937' }}
                         />
                         <button
                           onClick={() => void onRecordPayment(loan._id)}

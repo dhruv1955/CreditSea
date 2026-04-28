@@ -93,6 +93,7 @@ export default function LoginPage() {
               required
               className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm outline-none ring-amber-300 focus:ring"
               placeholder="you@example.com"
+              style={{ color: '#1f2937' }}
             />
           </label>
 
@@ -104,8 +105,9 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 pr-20 text-sm text-amber-950 outline-none ring-amber-300 focus:ring"
+                className="w-full rounded-lg border border-amber-300 px-3 py-2 pr-20 text-sm outline-none ring-amber-300 focus:ring"
                 placeholder="Enter your password"
+                style={{ color: '#1f2937' }}
               />
               <button
                 type="button"
