@@ -1,5 +1,5 @@
- # Node
- node_modules/
+# Node
+node_modules/
 server/node_modules/
 client/node_modules/
 npm-debug.log*
@@ -20,34 +20,31 @@ client/dist/
 # Environment files
 .env
 .env.*
- .env.local
- .env.development.local
- .env.test.local
- .env.production.local
+!.env*.example
 server/.env
 client/.env.local
- 
- # Logs
- logs
- *.log
- 
- # OS files
- .DS_Store
- Thumbs.db
- 
- # Editor folders
- .vscode/
- .idea/
- 
- # Coverage
- coverage/
- *.lcov
- 
- # Uploads / runtime data
- uploads/
- server/uploads/
- 
- # Misc
- *.pem
- credentials
- ~$*
+
+# Logs
+logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+*.lcov
+
+# Uploads / runtime data
+uploads/
+server/uploads/
+
+# Misc
+*.pem
+credentials
+~$*
