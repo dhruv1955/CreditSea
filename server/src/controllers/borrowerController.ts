@@ -82,7 +82,8 @@ export const savePersonalDetails = async (
     }
 
     return res.status(200).json({ success: true, message: "Personal details saved", data: { breStatus: "passed" } });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to save personal details" });
   }
 };
@@ -112,7 +113,8 @@ export const uploadSalarySlip = async (req: AuthenticatedRequest, res: Response)
     await user.save();
 
     return res.status(200).json({ success: true, message: "File uploaded", data: { salarySlipUrl: `/uploads/${file.filename}` } });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to upload salary slip" });
   }
 };
@@ -202,7 +204,8 @@ export const applyLoan = async (req: AuthenticatedRequest & Request<unknown, unk
         status: createdLoan.status,
       },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to apply loan" });
   }
 };
@@ -220,7 +223,8 @@ export const getMyLoan = async (req: AuthenticatedRequest, res: Response) => {
     }
 
     return res.status(200).json({ success: true, data: loan });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch loan" });
   }
 };
@@ -283,7 +287,8 @@ export const getProfile = async (req: AuthenticatedRequest, res: Response) => {
         } : null,
       },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch profile" });
   }
 };
@@ -313,7 +318,8 @@ export const getPaymentHistory = async (
         payments,
       },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch payment history" });
   }
 };

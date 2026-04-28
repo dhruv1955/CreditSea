@@ -39,7 +39,8 @@ export const signup = async (req: Request<unknown, unknown, SignupBody>, res: Re
       success: true,
       data: { id: user._id, name: user.name, email: user.email, role: user.role },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to signup" });
   }
 };
@@ -80,7 +81,8 @@ export const login = async (req: Request<unknown, unknown, LoginBody>, res: Resp
         user: { id: user._id, name: user.name, email: user.email, role: user.role, breStatus: user.breStatus },
       },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to login" });
   }
 };

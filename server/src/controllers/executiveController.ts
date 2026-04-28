@@ -54,7 +54,8 @@ export const getSalesLeads = async (_req: Request, res: Response) => {
     ]);
 
     return res.status(200).json({ success: true, data: leads });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch sales leads" });
   }
 };
@@ -63,7 +64,8 @@ export const getSanctionQueue = async (_req: Request, res: Response) => {
   try {
     const loans = await Loan.find({ status: "applied" }).populate("borrowerId", "name email monthlySalary").sort({ createdAt: -1 });
     return res.status(200).json({ success: true, data: loans });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch sanction queue" });
   }
 };
@@ -83,7 +85,8 @@ export const approveLoan = async (req: Request<{ loanId: string }>, res: Respons
     await loan.save();
 
     return res.status(200).json({ success: true, message: "Loan sanctioned", data: loan });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to sanction loan" });
   }
 };
@@ -108,7 +111,8 @@ export const rejectLoan = async (req: Request<{ loanId: string }, unknown, Rejec
     await loan.save();
 
     return res.status(200).json({ success: true, message: "Loan rejected", data: loan });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to reject loan" });
   }
 };
@@ -117,7 +121,8 @@ export const getDisbursementQueue = async (_req: Request, res: Response) => {
   try {
     const loans = await Loan.find({ status: "sanctioned" }).populate("borrowerId", "name email").sort({ sanctionedAt: -1 });
     return res.status(200).json({ success: true, data: loans });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch disbursement queue" });
   }
 };
@@ -137,7 +142,8 @@ export const disburseLoan = async (req: Request<{ loanId: string }>, res: Respon
     await loan.save();
 
     return res.status(200).json({ success: true, message: "Loan disbursed", data: loan });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to disburse loan" });
   }
 };
@@ -159,7 +165,8 @@ export const getCollectionQueue = async (_req: Request, res: Response) => {
     );
 
     return res.status(200).json({ success: true, data: enriched });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch collection queue" });
   }
 };
@@ -256,7 +263,8 @@ export const getCollectionPaymentHistory = async (
         payments,
       },
     });
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ success: false, message: "Failed to fetch payment history" });
   }
 };
