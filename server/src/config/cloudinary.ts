@@ -11,6 +11,10 @@ cloudinary.config({
 // Configure Cloudinary storage for multer
 export const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
+  params: {
+    folder: "salary-slips",
+    allowed_formats: ["pdf", "jpg", "jpeg", "png"],
+  } as any,
 });
 
 export { cloudinary };
