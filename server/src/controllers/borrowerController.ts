@@ -109,10 +109,10 @@ export const uploadSalarySlip = async (req: AuthenticatedRequest, res: Response)
       return res.status(400).json({ success: false, message: "Salary slip file is required" });
     }
 
-    user.salarySlipUrl = `/uploads/${file.filename}`;
+    user.salarySlipUrl = file.path;
     await user.save();
 
-    return res.status(200).json({ success: true, message: "File uploaded", data: { salarySlipUrl: `/uploads/${file.filename}` } });
+    return res.status(200).json({ success: true, message: "File uploaded", data: { salarySlipUrl: file.path } });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, message: "Failed to upload salary slip" });

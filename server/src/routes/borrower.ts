@@ -4,17 +4,9 @@ import path from "path";
 import { applyLoan, getMyLoan, savePersonalDetails, uploadSalarySlip, getProfile, getPaymentHistory } from "../controllers/borrowerController";
 import { authenticate } from "../middleware/authenticate";
 import { authorize } from "../middleware/authorize";
+import { storage } from "../config/cloudinary";
 
 const router = Router();
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, process.env.UPLOAD_DIR || "uploads/");
-  },
-  filename: (_req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname.replace(/\s+/g, "_")}`);
-  },
-});
 
 const upload = multer({
   storage,

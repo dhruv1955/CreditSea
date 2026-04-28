@@ -50,6 +50,11 @@ MONGODB_URI=mongodb://localhost:27017/lms
 JWT_SECRET=any_long_random_string
 JWT_EXPIRES_IN=7d
 UPLOAD_DIR=uploads/
+
+# Cloudinary Configuration (for file uploads)
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
 **Frontend** - copy the example file:
@@ -164,6 +169,9 @@ CreditSea-main/
 | `JWT_SECRET` | Secret used to sign tokens - make it long and random |
 | `JWT_EXPIRES_IN` | How long tokens stay valid (e.g. `7d`) |
 | `UPLOAD_DIR` | Where salary slip files get saved (default: `uploads/`) |
+| `CLOUDINARY_CLOUD_NAME` | Your Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Your Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Your Cloudinary API secret |
 
 ### `client/.env.local`
 
