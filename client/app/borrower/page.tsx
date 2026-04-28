@@ -11,6 +11,10 @@ import {
 } from "@/lib/api";
 import { clearAuth, getAuth } from "@/lib/auth";
 import { BorrowerProfile, EmploymentMode, PaymentRecord } from "@/lib/types";
+import PersonalDetailsForm from "../components/PersonalDetailsForm";
+import SalarySlipUpload from "../components/SalarySlipUpload";
+import LoanCalculator from "../components/LoanCalculator";
+import LoanStatusTracking from "../components/LoanStatusTracking";
 
 const MIN_AMOUNT = 50000;
 const MAX_AMOUNT = 500000;
@@ -225,160 +229,40 @@ export default function BorrowerPage() {
         {error ? <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">{error}</p> : null}
 
         <section className="mt-8 grid gap-6 lg:grid-cols-2">
-          <article className="rounded-2xl border border-amber-200 bg-white p-5">
-            <h2 className="text-lg font-semibold text-amber-950">1. Personal details and BRE</h2>
-            <form className="mt-4 space-y-3" onSubmit={onSubmitPersonal}>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                placeholder="Full name"
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
-                style={{ color: '#1f2937' }}
-              />
-              <input
-                value={pan}
-                onChange={(e) => setPan(e.target.value.toUpperCase())}
-                required
-                maxLength={10}
-                placeholder="PAN (ABCDE1234F)"
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm uppercase"
-                style={{ color: '#1f2937' }}
-              />
-              <input
-                type="date"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-                required
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
-                style={{ color: '#1f2937' }}
-              />
-              <input
-                type="number"
-                value={monthlySalary}
-                min={25000}
-                onChange={(e) => setMonthlySalary(e.target.value)}
-                required
-                placeholder="Monthly salary"
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
-                style={{ color: '#1f2937' }}
-              />
-              <select
-                value={employmentMode}
-                onChange={(e) => setEmploymentMode(e.target.value as EmploymentMode)}
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm"
-                style={{ color: '#1f2937' }}
-              >
-                <option value="salaried">Salaried</option>
-                <option value="self_employed">Self employed</option>
-                <option value="unemployed">Unemployed</option>
-              </select>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
-              >
-                Save and run BRE
-              </button>
-            </form>
-          </article>
+          <PersonalDetailsForm
+            name={name}
+            setName={setName}
+            pan={pan}
+            setPan={setPan}
+            dob={dob}
+            setDob={setDob}
+            monthlySalary={monthlySalary}
+            setMonthlySalary={setMonthlySalary}
+            employmentMode={employmentMode}
+            setEmploymentMode={setEmploymentMode}
+            onSubmit={onSubmitPersonal}
+            loading={loading}
+          />
 
-          <article className="rounded-2xl border border-amber-200 bg-white p-5">
-            <h2 className="text-lg font-semibold text-amber-950">2. Salary slip upload</h2>
-            <p className="mt-1 text-sm text-amber-800">Allowed formats: PDF, JPG, JPEG, PNG up to 5 MB.</p>
+          <SalarySlipUpload
+            salarySlip={salarySlip}
+            setSalarySlip={setSalarySlip}
+            onSubmit={onUploadSalarySlip}
+            loading={loading}
+            salarySlipUrl={profile?.salarySlipUrl}
+            breStatus={profile?.breStatus}
+          />
 
-            <form className="mt-4 space-y-3" onSubmit={onUploadSalarySlip}>
-              <label className="block">
-                <span className="mb-1 block text-sm font-medium text-amber-900">Choose salary slip</span>
-                <div className="rounded-lg border border-dashed border-amber-400 bg-amber-50 px-3 py-3 text-sm text-amber-900">
-                  {salarySlip ? `Selected: ${salarySlip.name}` : "Upload your latest salary slip (PDF/JPG/JPEG/PNG, max 5 MB)."}
-                </div>
-              </label>
-              <input
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(e) => setSalarySlip(e.target.files?.[0] || null)}
-                className="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm file:mr-3 file:rounded file:border-0 file:bg-amber-700 file:px-3 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-amber-800"
-                style={{ color: '#1f2937' }}
-              />
-              <button
-                type="submit"
-                disabled={loading || !salarySlip || profile?.breStatus !== "passed"}
-                className="w-full rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
-              >
-                Upload salary slip
-              </button>
-            </form>
-
-            {profile?.salarySlipUrl ? (
-              <p className="mt-3 text-sm font-medium text-emerald-700">Salary slip available: {profile.salarySlipUrl}</p>
-            ) : null}
-          </article>
-
-          <article className="rounded-2xl border border-amber-200 bg-white p-5 lg:col-span-2">
-            <h2 className="text-lg font-semibold text-amber-950">3. Loan configuration and apply</h2>
-
-            <form className="mt-4 grid gap-6 lg:grid-cols-2" onSubmit={onApplyLoan}>
-              <div>
-                <label className="block text-sm font-medium text-amber-900">Loan amount: Rs {money(amount)}</label>
-                <input
-                  type="range"
-                  min={MIN_AMOUNT}
-                  max={MAX_AMOUNT}
-                  step={1000}
-                  value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
-                  className="mt-2 w-full"
-                />
-
-                <label className="mt-5 block text-sm font-medium text-amber-900">Tenure: {tenure} days</label>
-                <input
-                  type="range"
-                  min={MIN_TENURE}
-                  max={MAX_TENURE}
-                  step={1}
-                  value={tenure}
-                  onChange={(e) => setTenure(Number(e.target.value))}
-                  className="mt-2 w-full"
-                />
-
-                <button
-                  type="submit"
-                  disabled={loading || profile?.breStatus !== "passed" || !profile?.salarySlipUrl || !!loan}
-                  className="mt-5 w-full rounded-lg bg-amber-700 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-800 disabled:opacity-60"
-                >
-                  Apply for loan
-                </button>
-              </div>
-
-              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                <p className="text-sm font-semibold text-amber-900">Live repayment calculation</p>
-                <p className="mt-2 text-sm text-amber-800">Formula: (P x R x T) / (365 x 100)</p>
-                <dl className="mt-4 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <dt className="text-amber-700">Principal</dt>
-                    <dd className="font-semibold text-amber-950">Rs {money(amount)}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-amber-700">Interest rate</dt>
-                    <dd className="font-semibold text-amber-950">{RATE}%</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-amber-700">Tenure</dt>
-                    <dd className="font-semibold text-amber-950">{tenure} days</dd>
-                  </div>
-                  <div className="flex justify-between border-t border-amber-200 pt-2">
-                    <dt className="text-amber-900">Simple interest</dt>
-                    <dd className="font-semibold text-amber-950">Rs {money(simpleInterest)}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-amber-900">Total repayment</dt>
-                    <dd className="font-semibold text-amber-950">Rs {money(totalRepayment)}</dd>
-                  </div>
-                </dl>
-              </div>
-            </form>
-          </article>
+          <LoanCalculator
+            amount={amount}
+            setAmount={setAmount}
+            tenure={tenure}
+            setTenure={setTenure}
+            onSubmit={onApplyLoan}
+            loading={loading}
+            simpleInterest={simpleInterest}
+            totalRepayment={totalRepayment}
+          />
         </section>
 
         {loan ? (

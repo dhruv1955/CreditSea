@@ -15,6 +15,10 @@ import {
 } from "@/lib/api";
 import { clearAuth, getAuth } from "@/lib/auth";
 import { CollectionQueueItem, LoanQueueItem, PaymentRecord, Role, SalesLead } from "@/lib/types";
+import SalesLeads from "../components/SalesLeads";
+import SanctionQueue from "../components/SanctionQueue";
+import DisbursementQueue from "../components/DisbursementQueue";
+import CollectionQueue from "../components/CollectionQueue";
 
 function money(value: number) {
   return new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(value);

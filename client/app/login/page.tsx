@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { loginUser } from "@/lib/api";
 import { clearAuth, getAuth, saveAuth } from "@/lib/auth";
 import { AuthSession } from "@/lib/types";
@@ -14,7 +14,12 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [existingSession, setExistingSession] = useState<AuthSession | null>(() => getAuth());
+  const [existingSession, setExistingSession] = useState<AuthSession | null>(null);
+
+  // Hydrate existing session on client side
+  useEffect(() => {
+    setExistingSession(getAuth());
+  }, []);
 
   const continueAsCurrentUser = () => {
     if (!existingSession) return;
