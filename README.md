@@ -16,8 +16,8 @@ A full-stack loan management platform where borrowers can apply for loans and in
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/dhruv1955/CreditSea.git
-cd CreditSea
+git clone <repo-url>
+cd CreditSea-main
 ```
 
 ### 2. Install dependencies
@@ -46,7 +46,7 @@ cp server/.env.example server/.env
 Your `server/.env` should look like this:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/lms
+MONGODB_URI=<your-mongodb-connection-string>
 JWT_SECRET=any_long_random_string
 JWT_EXPIRES_IN=7d
 UPLOAD_DIR=uploads/
@@ -106,7 +106,7 @@ After running the seed script, these accounts are ready to use:
 
 ## Demo
 
-Video walkthrough: *Coming soon*
+Video walkthrough: `<add link here>`
 
 ---
 
