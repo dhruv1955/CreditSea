@@ -19,10 +19,10 @@ A modern, full-stack loan management application that streamlines the entire loa
 ### 1. Get Your Dependencies Ready
 ```bash
 # Backend dependencies
-cd server && npm install
+cd server; npm install
 
 # Frontend dependencies  
-cd client && npm install
+cd client; npm install
 ```
 
 ### 2. Set Up Your Environment
@@ -59,7 +59,7 @@ To explore the system, we've pre-configured test users for each role:
 
 ### Quick Seed Setup
 ```bash
-cd server && npx ts-node src/seed.ts
+cd server; npx ts-node src/seed.ts
 ```
 
 ### Login Credentials
