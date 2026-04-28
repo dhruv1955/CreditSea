@@ -17,7 +17,6 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
-app.use("/uploads", express.static(path.resolve(process.env.UPLOAD_DIR || "uploads/")));
 
 app.get("/api/health", (_req, res) => {
   res.status(200).json({ success: true, message: "LMS server healthy" });
